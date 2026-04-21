@@ -1,0 +1,20 @@
+# Environment & secrets
+appsettings.Development.json
+appsettings.Production.json
+*.user
+.env
+.env.development
+.env.production
+.env.local
+
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+
+# Logs
+*.log

@@ -1,0 +1,6 @@
+@MeridianEats.API_HostAddress = http://localhost:5101
+
+GET {{MeridianEats.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

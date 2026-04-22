@@ -1,0 +1,133 @@
+/* Base container — no background, no box */
+.app-download {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+/* Small text above logo */
+.download-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111827; /* use dark text for visibility */
+  margin-bottom: 20px;
+}
+
+/* Big logo styling */
+.app-logo {
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 30px;
+  line-height: 1.1;
+}
+
+/* Logo colors */
+.logo-accent {
+  color: #ff4c24; /* brand accent */
+}
+
+.logo-dark {
+  color: #000000; /* dark letters */
+}
+
+/* App store buttons container */
+.app-download-platform {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.app-download-platform img {
+  width: 150px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.app-download-platform img:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(255, 76, 36, 0.4);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .download-text {
+    font-size: 16px;
+  }
+
+  .app-logo {
+    font-size: 36px;
+  }
+
+  .app-download-platform img {
+    width: 120px;
+  }
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+  .app-download {
+    margin: 50px auto;
+  }
+
+  .download-text {
+    font-size: 17px;
+  }
+
+  .app-logo {
+    font-size: 42px;
+  }
+
+  .app-download-platform img {
+    width: 140px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .app-download {
+    margin: 45px auto;
+  }
+
+  .download-text {
+    font-size: 16px;
+  }
+
+  .app-logo {
+    font-size: 38px;
+  }
+
+  .app-download-platform {
+    gap: 16px;
+  }
+
+  .app-download-platform img {
+    width: 130px;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 480px) {
+  .download-text {
+    font-size: 15px;
+  }
+
+  .app-logo {
+    font-size: 32px;
+  }
+
+  .app-download-platform {
+    gap: 14px;
+  }
+
+  .app-download-platform img {
+    width: 115px;
+  }
+}

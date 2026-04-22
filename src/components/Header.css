@@ -1,0 +1,162 @@
+.header {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("header_img.png");
+  background-size: cover;
+  background-position: center;
+  padding: 100px 60px;
+  display: flex;
+  gap: 1.5vw;
+
+  /* Round corners */
+  border-radius: 20px; /* adjust radius as needed */
+  overflow: hidden; /* ensures background and content are clipped */
+}
+
+/* Fade everything together */
+.header-contents {
+  max-width: 560px;
+  color: white;
+
+  opacity: 0;
+  animation: smoothFade 1.2s ease forwards;
+}
+
+/* Text sizing */
+.header-contents h3 {
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color: white;
+}
+.header-contents h3:hover {
+  color: #ff4c24;
+}
+
+.header-contents h3.active {
+  color: #ff4c24;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.header-contents h2 {
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 30px;
+}
+
+.header-contents p {
+  font-size: 14px;
+  max-width: 420px;
+  margin-bottom: 34px;
+  opacity: 0.85;
+}
+
+/* Button */
+.header-contents button {
+  background-color: white;
+  color: #111;
+  border: none;
+  padding: 14px 36px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.header-contents button:hover {
+  background-color: #f2f2f2;
+  transform: translateY(-2px);
+}
+
+/* One smooth animation */
+@keyframes smoothFade {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 80px 40px;
+  }
+
+  .header-contents h2 {
+    font-size: 44px;
+  }
+
+  .header-contents p {
+    font-size: 13px;
+    max-width: 380px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .header {
+    padding: 60px 25px;
+    border-radius: 16px;
+  }
+
+  .header-contents {
+    max-width: 100%;
+  }
+
+  .header-contents h2 {
+    font-size: 34px;
+    line-height: 1.25;
+  }
+
+  .header-contents h3 {
+    font-size: 13px;
+  }
+
+  .header-contents p {
+    font-size: 13px;
+    max-width: 100%;
+  }
+
+  .header-contents button {
+    padding: 12px 28px;
+    font-size: 14px;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 480px) {
+  .header {
+    padding: 50px 20px;
+    border-radius: 14px;
+  }
+
+  .header-contents h2 {
+    font-size: 26px;
+  }
+
+  .header-contents h3 {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .header-contents p {
+    font-size: 12px;
+  }
+
+  .header-contents button {
+    padding: 10px 22px;
+    font-size: 13px;
+  }
+}

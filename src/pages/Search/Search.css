@@ -1,0 +1,221 @@
+.search-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px 60px;
+  font-family: "Inter", sans-serif;
+  color: #1f2937;
+}
+
+.search-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+/* ── Category Pills ── */
+.menu-list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin: 20px 0;
+  padding-bottom: 4px;
+}
+
+.menu-list button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 20px;
+  background: #f3f4f6;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.menu-list button.active {
+  background: #ff4c24;
+  color: white;
+}
+
+.menu-list button:hover:not(.active) {
+  background: #e5e7eb;
+}
+
+/* ── Search Bar ── */
+.search-bar {
+  margin-bottom: 30px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1.5px solid #d1d5db;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.search-bar input:focus {
+  border-color: #ff4c24;
+}
+
+/* ── Results Grid ── */
+.search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.no-food {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 16px;
+  color: #9ca3af;
+  padding: 40px 0;
+}
+
+/* ── Food Card ── */
+.food-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  overflow: visible;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Image Wrapper ── */
+.food-card-img-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.food-card-img-wrapper > img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+  display: block;
+}
+
+/* ── Overlay Controls ── */
+.food-card-controls {
+  position: absolute;
+  bottom: -18px;
+  right: 14px;
+}
+
+.btn-add-white {
+  background: #ff4c24;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.btn-add-white:hover {
+  transform: scale(1.12);
+}
+
+.btn-add-white img {
+  width: 18px;
+  height: 18px;
+}
+
+.food-card-counter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 4px 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.food-card-counter button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.food-card-counter button img {
+  width: 20px;
+  height: 20px;
+}
+
+.food-card-counter span {
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+  min-width: 16px;
+  text-align: center;
+}
+
+/* ── Card Info ── */
+.food-info {
+  padding: 24px 14px 14px;
+}
+
+.food-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.food-name-row h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1c1c1c;
+  margin: 0;
+}
+
+.rating-stars {
+  width: 70px;
+}
+
+.food-description {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.food-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ff4c24;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .search-results {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+  .search-title {
+    font-size: 24px;
+  }
+}

@@ -1,0 +1,149 @@
+/* ── Container ── */
+.explore-menu {
+  padding: 60px 40px;
+  background-color: #fff8f3;
+  text-align: center;
+}
+
+.explore-menu h2 {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #ff4c24;
+}
+
+.explore-menu-text {
+  font-size: 15px;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.explore-menu hr {
+  border: none;
+  height: 1px;
+  background-color: #e1e1e1;
+  margin: 16px 0;
+}
+
+/* ── Items row — single line with scroll ── */
+.explore-menu-items {
+  display: flex;
+  flex-wrap: nowrap; /* ← never wrap */
+  gap: 24px;
+  justify-content: center;
+  padding: 20px 0;
+  overflow-x: auto; /* ← scroll on small screens */
+  scrollbar-width: none; /* hide scrollbar Firefox */
+}
+
+.explore-menu-items::-webkit-scrollbar {
+  display: none; /* hide scrollbar Chrome */
+}
+
+/* ── Individual item ── */
+.explore-menu-item {
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0; /* ← don't shrink items */
+  transition: transform 0.3s ease;
+}
+
+/* ── Active state ── */
+.explore-menu-item.active .explore-menu-item-image {
+  border: 3px solid #ff4c24;
+  box-shadow: 0 0 0 4px rgba(255, 76, 36, 0.15);
+}
+
+.explore-menu-item.active .explore-menu-item-name {
+  color: #ff4c24;
+  font-weight: 700;
+}
+
+/* ── Image ── */
+.explore-menu-item-image {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.explore-menu-item:hover .explore-menu-item-image {
+  transform: scale(1.06);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Name ── */
+.explore-menu-item-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.explore-menu-item:hover .explore-menu-item-name {
+  color: #ff4c24;
+  transform: translateY(-3px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .explore-menu {
+    padding: 50px 30px;
+  }
+  .explore-menu h2 {
+    font-size: 36px;
+  }
+  .explore-menu-items {
+    justify-content: flex-start;
+    padding: 20px 10px;
+  }
+  .explore-menu-item-image {
+    width: 95px;
+    height: 95px;
+  }
+}
+
+@media (max-width: 768px) {
+  .explore-menu {
+    padding: 40px 20px;
+  }
+  .explore-menu h2 {
+    font-size: 30px;
+  }
+  .explore-menu-items {
+    gap: 16px;
+  }
+  .explore-menu-item-image {
+    width: 85px;
+    height: 85px;
+  }
+  .explore-menu-item-name {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .explore-menu {
+    padding: 30px 16px;
+  }
+  .explore-menu h2 {
+    font-size: 26px;
+  }
+  .explore-menu-item-image {
+    width: 75px;
+    height: 75px;
+  }
+  .explore-menu-item-name {
+    font-size: 12px;
+  }
+}

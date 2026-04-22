@@ -1,0 +1,502 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* ── Variables (matches your existing MeridianEats palette) ── */
+:root {
+  --orange:        #e84118;
+  --orange-hover:  #c73510;
+  --orange-light:  #fff1ee;
+  --dark:          #1c1c1c;
+  --mid:           #4a4a4a;
+  --muted:         #8a8a8a;
+  --bg:            #f7f5f2;
+  --card:          #ffffff;
+  --border:        #e8e4df;
+  --green:         #1db954;
+  --green-bg:      #edfbf2;
+  --amber:         #f59e0b;
+  --amber-bg:      #fffbeb;
+  --red:           #e53e3e;
+  --red-bg:        #fff5f5;
+}
+
+/* ── Page Shell ── */
+.past-orders-page {
+  background: var(--bg);
+  min-height: 100vh;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Hero Strip ── */
+.po-hero {
+  background: var(--dark);
+  padding: 52px 6vw 48px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.po-hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.po-hero-text h1 em {
+  font-style: normal;
+  color: var(--orange);
+}
+
+.po-hero-text p {
+  color: #999;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.po-hero-stats {
+  display: flex;
+  gap: 36px;
+}
+
+.po-stat { text-align: right; }
+
+.po-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--orange);
+  line-height: 1;
+}
+
+.po-stat-label {
+  font-size: 0.72rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-top: 3px;
+}
+
+/* ── Main Content ── */
+.po-content {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 40px 20px 100px;
+}
+
+/* ── Filter Bar ── */
+.po-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.po-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--mid);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.po-filter-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.po-filter-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+
+.po-filter-count {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 100px;
+  padding: 1px 8px;
+  font-size: 0.73rem;
+}
+
+.po-filter-btn.active .po-filter-count {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Order Cards ── */
+.po-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.po-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: box-shadow 0.22s, transform 0.22s;
+  animation: cardIn 0.3s ease both;
+}
+
+.po-card:nth-child(1) { animation-delay: 0.00s; }
+.po-card:nth-child(2) { animation-delay: 0.06s; }
+.po-card:nth-child(3) { animation-delay: 0.12s; }
+.po-card:nth-child(4) { animation-delay: 0.18s; }
+.po-card:nth-child(5) { animation-delay: 0.24s; }
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.po-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.09);
+  transform: translateY(-2px);
+}
+
+/* Card Header */
+.po-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  background: #fafaf8;
+  border-bottom: 1.5px solid var(--border);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.po-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.po-order-id {
+  font-size: 0.73rem;
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.po-order-date {
+  font-size: 0.88rem;
+  color: var(--mid);
+  font-weight: 500;
+}
+
+.po-card-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Status Badges */
+.po-status {
+  padding: 4px 13px;
+  border-radius: 100px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.po-status.Delivered  { background: var(--green-bg); color: var(--green); }
+.po-status.Cancelled  { background: var(--red-bg);   color: var(--red);   }
+.po-status.Processing { background: var(--amber-bg); color: var(--amber); }
+.po-status.Pending    { background: var(--amber-bg); color: var(--amber); }
+.po-status.Confirmed  { background: #eff6ff;          color: #3b82f6;     }
+
+/* Card Body */
+.po-card-body { padding: 20px 22px; }
+
+.po-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.po-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.po-item-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1.5px solid var(--border);
+  flex-shrink: 0;
+  background: #f0ede8;
+}
+
+.po-item-img-placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  flex-shrink: 0;
+  background: #f0ede8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.po-item-info { flex: 1; min-width: 0; }
+
+.po-item-name {
+  font-weight: 600;
+  font-size: 0.93rem;
+  color: var(--dark);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.po-item-qty {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.po-item-price {
+  font-weight: 700;
+  font-size: 0.93rem;
+  color: var(--dark);
+  flex-shrink: 0;
+}
+
+/* Show More */
+.po-show-more {
+  background: none;
+  border: 1.5px dashed var(--border);
+  border-radius: 8px;
+  padding: 7px 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.18s;
+  width: 100%;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.po-show-more:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+  background: var(--orange-light);
+}
+
+/* Cost Breakdown */
+.po-breakdown {
+  background: #fafaf8;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  font-size: 0.84rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: fadeDown 0.2s ease;
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.po-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+}
+
+.po-breakdown-row.bd-total {
+  color: var(--dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  margin-top: 2px;
+}
+
+/* Divider */
+.po-divider {
+  border: none;
+  border-top: 1.5px dashed var(--border);
+  margin: 0 0 18px;
+}
+
+/* Card Footer */
+.po-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.po-total-block { display: flex; flex-direction: column; gap: 2px; }
+
+.po-total-label {
+  font-size: 0.73rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.po-total-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--orange);
+  font-weight: 700;
+}
+
+.po-actions { display: flex; gap: 10px; }
+
+.po-btn {
+  padding: 9px 20px;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  text-decoration: none;
+}
+
+.po-btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--mid);
+}
+
+.po-btn-outline:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.po-btn-primary {
+  background: var(--orange);
+  border: 1.5px solid var(--orange);
+  color: #fff;
+}
+
+.po-btn-primary:hover {
+  background: var(--orange-hover);
+  border-color: var(--orange-hover);
+}
+
+/* ── Loading Skeleton ── */
+.po-skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.po-skeleton-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.po-skeleton-header {
+  padding: 16px 22px;
+  background: #fafaf8;
+  border-bottom: 1.5px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.po-skeleton-body { padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+
+.po-skel {
+  background: linear-gradient(90deg, #ede9e4 25%, #f5f2ee 50%, #ede9e4 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ── Empty State ── */
+.po-empty {
+  text-align: center;
+  padding: 80px 24px;
+  animation: cardIn 0.3s ease;
+}
+
+.po-empty-icon {
+  font-size: 3.8rem;
+  display: block;
+  margin-bottom: 18px;
+  opacity: 0.35;
+}
+
+.po-empty h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.55rem;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.po-empty p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 28px;
+}
+
+/* ── Error State ── */
+.po-error {
+  text-align: center;
+  padding: 60px 24px;
+}
+
+.po-error-icon { font-size: 3rem; display: block; margin-bottom: 16px; }
+
+.po-error p {
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* ── Not Logged In ── */
+.po-auth-prompt {
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.po-auth-prompt .po-empty-icon { opacity: 0.3; }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .po-hero           { padding: 36px 20px 32px; }
+  .po-hero-stats     { gap: 24px; }
+  .po-card-footer    { flex-direction: column; align-items: flex-start; }
+  .po-actions        { width: 100%; }
+  .po-btn            { flex: 1; text-align: center; }
+  .po-card-header    { gap: 10px; }
+}

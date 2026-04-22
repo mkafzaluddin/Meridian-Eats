@@ -18,14 +18,14 @@ public class AppDbContext : DbContext
     {
         builder.Entity<FoodItem>()
             .Property(f => f.Price)
-            .HasColumnType("decimal(10,2)");
+            .HasColumnType("numeric(10,2)");
 
         builder.Entity<Order>()
             .Property(o => o.TotalAmount)
-            .HasColumnType("decimal(10,2)");
+            .HasColumnType("numeric(10,2)");
 
         builder.Entity<OrderItem>()
             .Property(oi => oi.UnitPrice)
-            .HasColumnType("decimal(10,2)");
+            .HasColumnType("numeric(10,2)");
     }
 }

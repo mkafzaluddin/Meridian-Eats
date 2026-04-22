@@ -1,6 +1,6 @@
 // seed.js — run with: node seed.js
 // Make sure your backend is running on port 5101 first
-const API = "http://localhost:5101/api";
+const API = "https://grand-patience-production.up.railway.app/api";
 const fs = require("fs");
 const path = require("path");
 

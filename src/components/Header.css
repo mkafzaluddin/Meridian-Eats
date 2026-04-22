@@ -1,7 +1,7 @@
 .header {
   background:
     linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("header_img.png");
+    url("/header_img.png");
   background-size: cover;
   background-position: center;
   padding: 100px 60px;

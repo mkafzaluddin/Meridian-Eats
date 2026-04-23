@@ -70,11 +70,13 @@
   height: 110px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
   border: 3px solid transparent;
   transition: all 0.3s ease;
+  display: block;
+  background: #f0f0f0;
 }
-
 .explore-menu-item:hover .explore-menu-item-image {
   transform: scale(1.06);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);

@@ -1,15 +1,9 @@
 import React, { useContext } from "react";
 import "./ExploreMenu.css";
 import { StoreContext } from "../context/StoreContext";
-import { menu_list } from "../assets/assets";
 
 const ExploreMenu = ({ category, setCategory }) => {
   const { categories } = useContext(StoreContext);
-
-  const menuItems = categories.map((cat, i) => ({
-    ...cat,
-    menu_image: menu_list[i]?.menu_image ?? null,
-  }));
 
   return (
     <div className="explore-menu" id="explore-menu">
@@ -19,7 +13,7 @@ const ExploreMenu = ({ category, setCategory }) => {
       </p>
       <hr />
       <div className="explore-menu-items">
-        {menuItems.map((cat) => (
+        {categories.map((cat) => (
           <div
             key={cat.id}
             className={`explore-menu-item ${category === cat.name ? "active" : ""}`}
@@ -27,13 +21,12 @@ const ExploreMenu = ({ category, setCategory }) => {
               setCategory((prev) => (prev === cat.name ? "All" : cat.name))
             }
           >
-            {cat.menu_image && (
-              <img
-                src={cat.menu_image}
-                alt={cat.name}
-                className="explore-menu-item-image"
-              />
-            )}
+            <img
+              src={cat.imageUrl}
+              alt={cat.name}
+              className="explore-menu-item-image"
+              onError={(e) => (e.target.style.display = "none")}
+            />
             <h3 className="explore-menu-item-name">{cat.name}</h3>
           </div>
         ))}

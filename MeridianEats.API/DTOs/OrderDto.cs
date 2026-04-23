@@ -24,6 +24,7 @@ public class PlaceOrderDto
     [Required(ErrorMessage = "Phone is required.")]
     [RegularExpression(@"^\+?[\d\s\-().]{7,15}$", ErrorMessage = "Enter a valid phone number.")]
     public string Phone { get; set; } = string.Empty;
+     public decimal GrandTotal { get; set; }
 }
 
 public class OrderItemDto

@@ -47,7 +47,7 @@ function Cart({ setIsLoginOpen }) {
 
   const handleCheckout = () => {
     if (!user) {
-      setIsLoginOpen(true); // ← opens login modal instead of alert
+      setIsLoginOpen(true);
       return;
     }
     navigate("/order", {

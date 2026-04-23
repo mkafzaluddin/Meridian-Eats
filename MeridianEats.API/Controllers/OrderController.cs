@@ -28,7 +28,7 @@ public class OrderController : ControllerBase
         var order = new Order
         {
             UserId      = userId,
-            TotalAmount = cartItems.Sum(c => c.FoodItem.Price * c.Quantity),
+           TotalAmount = dto.GrandTotal > 0 ? dto.GrandTotal : cartItems.Sum(c => c.FoodItem.Price * c.Quantity),
             Street      = dto.Street, City    = dto.City,
             State       = dto.State,  ZipCode = dto.ZipCode, Phone = dto.Phone,
             OrderItems  = cartItems.Select(c => new OrderItem

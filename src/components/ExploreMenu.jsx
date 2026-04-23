@@ -25,6 +25,8 @@ const ExploreMenu = ({ category, setCategory }) => {
               src={cat.imageUrl}
               alt={cat.name}
               className="explore-menu-item-image"
+              width="110"
+              height="110"
               onError={(e) => (e.target.style.display = "none")}
             />
             <h3 className="explore-menu-item-name">{cat.name}</h3>

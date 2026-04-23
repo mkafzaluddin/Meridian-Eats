@@ -52,8 +52,13 @@ const LoginPopup = ({ setIsLoginOpen }) => {
       if (currState === "Sign Up") {
         await register(form.name, form.email, form.password);
       }
-      await login(form.email, form.password);
+      const data = await login(form.email, form.password);
       setIsLoginOpen(false);
+
+      // ← redirect admin to admin panel automatically
+      if (data.role === "Admin") {
+        window.location.href = "/admin";
+      }
     } catch (err) {
       setApiError(err.message);
     } finally {

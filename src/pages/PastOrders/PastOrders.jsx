@@ -81,13 +81,12 @@ function OrderCard({ order, onReorder }) {
   const visibleItems = expanded ? items : items.slice(0, PREVIEW);
 
   // ── map API field names ──
-  const subtotal = items.reduce(
-    (s, i) => s + (i.unitPrice ?? 0) * (i.quantity ?? 1),
-    0,
-  );
-  const tax = subtotal * 0.1;
-  const delivery = subtotal * 0.08;
-  const total = subtotal + tax + delivery; // ← calculate correctly
+ // ── map API field names ──
+const total    = order.totalAmount ?? 0;  // ← use stored total (includes all fees)
+const subtotal = items.reduce((s, i) => s + (i.unitPrice ?? 0) * (i.quantity ?? 1), 0);
+const tax      = subtotal * 0.1;
+const delivery = subtotal * 0.08;
+
 
   const status = order.status ?? "Pending";
   const orderId = String(order.id ?? "")

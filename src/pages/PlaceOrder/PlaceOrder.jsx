@@ -59,9 +59,8 @@ const PlaceOrder = () => {
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      return; // stop here, don't call API
+      return;
     }
-
     setLoading(true);
     setError("");
     try {
@@ -71,6 +70,7 @@ const PlaceOrder = () => {
         state: form.state,
         zipCode: form.zipCode,
         phone: form.phone,
+        grandTotal: grandTotal, // ← make sure this is here
       });
       setShowToast(true);
       setTimeout(() => navigate("/"), 4000);

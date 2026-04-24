@@ -81,12 +81,15 @@ function OrderCard({ order, onReorder }) {
   const visibleItems = expanded ? items : items.slice(0, PREVIEW);
 
   // ── map API field names ──
- // ── map API field names ──
-const total    = order.totalAmount ?? 0;  // ← use stored total (includes all fees)
-const subtotal = items.reduce((s, i) => s + (i.unitPrice ?? 0) * (i.quantity ?? 1), 0);
-const tax      = subtotal * 0.1;
-const delivery = subtotal * 0.08;
-
+  // ── map API field names ──
+  // ── map API field names ──
+  const subtotal = items.reduce(
+    (s, i) => s + (i.unitPrice ?? 0) * (i.quantity ?? 1),
+    0,
+  );
+  const tax = subtotal * 0.1;
+  const delivery = subtotal * 0.08;
+  const total = subtotal + tax + delivery; // ← calculate correctly
 
   const status = order.status ?? "Pending";
   const orderId = String(order.id ?? "")
@@ -146,7 +149,7 @@ const delivery = subtotal * 0.08;
         {expanded && (
           <div className="po-breakdown">
             <div className="po-breakdown-row">
-              <span>Subtotal</span>
+              <span>Items Subtotal</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
             <div className="po-breakdown-row">
@@ -154,11 +157,17 @@ const delivery = subtotal * 0.08;
               <span>${tax.toFixed(2)}</span>
             </div>
             <div className="po-breakdown-row">
-              <span>Delivery Fee</span>
+              <span>Delivery Fee (8%)</span>
               <span>${delivery.toFixed(2)}</span>
             </div>
+            {subtotal + tax + delivery !== total && (
+              <div className="po-breakdown-row" style={{ color: "#1db954" }}>
+                <span>Discounts / Tips</span>
+                <span>${(subtotal + tax + delivery - total).toFixed(2)}</span>
+              </div>
+            )}
             <div className="po-breakdown-row bd-total">
-              <span>Grand Total</span>
+              <span>Total Paid</span>
               <span>${total.toFixed(2)}</span>
             </div>
           </div>

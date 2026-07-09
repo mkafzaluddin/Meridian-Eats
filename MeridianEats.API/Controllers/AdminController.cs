@@ -149,25 +149,34 @@ public class AdminController : ControllerBase
             .ToListAsync());
 
     [HttpPost("foods")]
-    public async Task<IActionResult> CreateFood([FromForm] CreateFoodDto dto)
+public async Task<IActionResult> CreateFood([FromForm] CreateFoodDto dto)
+{
+    var imageUrl = "";
+    if (dto.Image != null)
     {
-        var imageUrl = "";
-        if (dto.Image != null)
-            imageUrl = await _cloudinary.UploadImageAsync(dto.Image, "foods");
-
-        var food = new FoodItem
+        try
         {
-            Name        = dto.Name,
-            Description = dto.Description,
-            Price       = dto.Price,
-            CategoryId  = dto.CategoryId,
-            IsAvailable = dto.IsAvailable,
-            ImageUrl    = imageUrl
-        };
-        _db.FoodItems.Add(food);
-        await _db.SaveChangesAsync();
-        return Ok(food);
+            imageUrl = await _cloudinary.UploadImageAsync(dto.Image, "foods");
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = "Image upload failed: " + ex.Message });
+        }
     }
+
+    var food = new FoodItem
+    {
+        Name        = dto.Name,
+        Description = dto.Description,
+        Price       = dto.Price,
+        CategoryId  = dto.CategoryId,
+        IsAvailable = dto.IsAvailable,
+        ImageUrl    = imageUrl
+    };
+    _db.FoodItems.Add(food);
+    await _db.SaveChangesAsync();
+    return Ok(food);
+}
 
     [HttpPut("foods/{id}")]
     public async Task<IActionResult> UpdateFood(int id, [FromForm] UpdateFoodDto dto)

@@ -97,4 +97,27 @@ public async Task<IActionResult> TrackOrder(int id)
                 }).ToList()
             }).ToListAsync());
     }
+
+
+    [HttpPut("{id}/cancel")]
+public async Task<IActionResult> CancelOrder(int id)
+{
+    var userId = UserHelper.GetUserId(User);
+    
+    var order = await _db.Orders
+        .FirstOrDefaultAsync(o => o.Id == id && o.UserId == userId);
+    
+    if (order == null)
+        return NotFound(new { message = "Order not found." });
+    
+    // Only allow cancellation if order is still Pending
+    if (order.Status != "Pending")
+        return BadRequest(new { message = $"Cannot cancel order with status '{order.Status}'. Only Pending orders can be cancelled." });
+    
+    order.Status = "Cancelled";
+    await _db.SaveChangesAsync();
+    
+    return Ok(new { message = "Order cancelled successfully.", orderId = order.Id });
+}
+
 }

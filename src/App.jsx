@@ -17,6 +17,7 @@ import OrderTracking from "./pages/OrderTracking/OrderTracking";
 import Menu from "./pages/Menu/Menu";
 import { useStore } from "./context/StoreContext";
 import NotFound from "./pages/NotFound/NotFound";
+import ChatWidget from './components/ChatWidget';
 
 // ── Route guards ──────────────────────────────────────────────────────
 function ProtectedRoute({ children, onLoginRequired }) {
@@ -105,7 +106,9 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+      <ChatWidget />
     </>
+    
   );
 };
 

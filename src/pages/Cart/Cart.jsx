@@ -13,24 +13,35 @@ function Cart({ setIsLoginOpen }) {
   const [couponError, setCouponError] = useState("");
   const navigate = useNavigate();
 
-  const VALID_COUPONS = { FOOD10: 0.1, FOOD50: 0.5, FOOD75: 0.75 };
+  const VALID_COUPONS = {
+    FOOD10: { rate: 0.1, label: "10% OFF" },
+    FOOD50: { rate: 0.5, label: "50% OFF" },
+    FOOD75: { rate: 0.75, label: "75% OFF" },
+  };
 
   const cartData = foodList.filter((item) => cartItems[item.id] > 0);
+
   const subtotal = cartData.reduce(
     (sum, item) => sum + item.price * cartItems[item.id],
     0,
   );
+
   const tax = subtotal * 0.1;
   const deliveryFee = subtotal * 0.08;
-  const discountRate = VALID_COUPONS[coupon.toUpperCase()] || 0;
+
+  const appliedCoupon = VALID_COUPONS[coupon.toUpperCase()];
+  const discountRate = appliedCoupon?.rate || 0;
+
   const discount = subtotal * discountRate;
   const grandTotal = subtotal + tax + deliveryFee + Number(tip) - discount;
 
   const handleCoupon = (val) => {
     setCoupon(val);
     setCouponError("");
-    if (val && !VALID_COUPONS[val.toUpperCase()])
+
+    if (val && !VALID_COUPONS[val.toUpperCase()]) {
       setCouponError("Invalid coupon code.");
+    }
   };
 
   if (cartData.length === 0)
@@ -50,6 +61,7 @@ function Cart({ setIsLoginOpen }) {
       setIsLoginOpen(true);
       return;
     }
+
     navigate("/order", {
       state: {
         subtotal,
@@ -67,21 +79,26 @@ function Cart({ setIsLoginOpen }) {
     <div className="cart-container">
       <div className="cart-items-section">
         <h2 className="cart-title">Your Cart</h2>
+
         {cartData.map((item) => (
           <div key={item.id} className="cart-item">
             <div className="cart-item-left">
               <img src={getImage(item.imageUrl)} alt={item.name} />
               <span className="cart-item-name">{item.name}</span>
             </div>
+
             <p className="cart-item-price">${item.price.toFixed(2)}</p>
+
             <div className="cart-item-quantity">
               <button onClick={() => removeFromCart(item.id)}>-</button>
               <span>{cartItems[item.id]}</span>
               <button onClick={() => addToCart(item.id)}>+</button>
             </div>
+
             <p className="cart-item-total">
               ${(item.price * cartItems[item.id]).toFixed(2)}
             </p>
+
             <button
               onClick={() => removeFromCart(item.id)}
               className="cart-item-remove"
@@ -94,18 +111,22 @@ function Cart({ setIsLoginOpen }) {
 
       <div className="cart-summary-section">
         <h3>Order Summary</h3>
+
         <div className="summary-row">
           <span>Subtotal</span>
           <span>${subtotal.toFixed(2)}</span>
         </div>
+
         <div className="summary-row">
           <span>Tax (10%)</span>
           <span>${tax.toFixed(2)}</span>
         </div>
+
         <div className="summary-row">
           <span>Delivery Fee (8%)</span>
           <span>${deliveryFee.toFixed(2)}</span>
         </div>
+
         <div className="summary-row">
           <span>Tip</span>
           <input
@@ -116,8 +137,10 @@ function Cart({ setIsLoginOpen }) {
             onChange={(e) => setTip(Math.max(0, Number(e.target.value)))}
           />
         </div>
+
         <div className="summary-row coupon-row">
           <span>Coupon</span>
+
           <div>
             <input
               type="text"
@@ -125,24 +148,31 @@ function Cart({ setIsLoginOpen }) {
               placeholder="Enter code"
               onChange={(e) => handleCoupon(e.target.value)}
             />
-            {couponError && <span className="coupon-error">{couponError}</span>}
-            {discount > 0 && (
+
+            {couponError && (
+              <span className="coupon-error">{couponError}</span>
+            )}
+
+            {appliedCoupon && (
               <span className="coupon-success">
-                ✓ {coupon.toUpperCase()} applied!
+                ✓ {coupon.toUpperCase()} ({appliedCoupon.label}) applied!
               </span>
             )}
           </div>
         </div>
+
         {discount > 0 && (
           <div className="summary-row discount">
             <span>Discount</span>
             <span>-${discount.toFixed(2)}</span>
           </div>
         )}
+
         <div className="summary-row grand-total">
           <span>Grand Total</span>
           <span>${grandTotal.toFixed(2)}</span>
         </div>
+
         <button className="checkout-btn" onClick={handleCheckout}>
           Proceed to Checkout
         </button>

@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Threading.RateLimiting;
 using MeridianEats.API.Data;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +19,7 @@ var connectionString = builder.Configuration.GetConnectionString("Default")
 
 // ── Database ──────────────────────────────────────────────────────────
 builder.Services.AddDbContext<AppDbContext>(opt =>
-    opt.UseNpgsql(connectionString));
+   opt.UseSqlServer(connectionString));
 
 // ── JWT Auth ──────────────────────────────────────────────────────────
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

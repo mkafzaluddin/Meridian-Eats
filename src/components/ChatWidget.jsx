@@ -36,7 +36,6 @@ export default function ChatWidget() {
   const messagesEndRef = useRef(null);
   const { token } = useContext(StoreContext);
 
-  // Auto scroll to bottom
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -58,7 +57,8 @@ export default function ChatWidget() {
           model: "openai/gpt-oss-20b",
           system_prompt: SYSTEM_PROMPT,
           allow_search: true,
-          session_id: sessionId
+          session_id: sessionId,
+          user_token: token || ""  // ← passes logged-in user's JWT token
         })
       });
 
@@ -91,16 +91,16 @@ export default function ChatWidget() {
 
   return (
     <div className="chat-widget">
-      {/* Chat window */}
       {isOpen && (
         <div className="chat-window">
-          {/* Header */}
           <div className="chat-header">
             <div className="chat-header-info">
               <div className="chat-avatar">🤖</div>
               <div>
                 <div className="chat-title">Meridian Assistant</div>
-                <div className="chat-subtitle">Online • Ask me anything</div>
+                <div className="chat-subtitle">
+                  {token ? "Online • Logged in" : "Online • Ask me anything"}
+                </div>
               </div>
             </div>
             <div className="chat-header-actions">
@@ -113,7 +113,6 @@ export default function ChatWidget() {
             </div>
           </div>
 
-          {/* Messages */}
           <div className="chat-messages">
             {messages.map((msg, i) => (
               <div key={i} className={`chat-message ${msg.role}`}>
@@ -137,14 +136,13 @@ export default function ChatWidget() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
           <div className="chat-input-area">
             <textarea
               className="chat-input"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask about menu, orders, delivery..."
+              placeholder={token ? "Ask about menu, orders, delivery..." : "Login to place orders..."}
               rows={1}
             />
             <button
@@ -158,7 +156,6 @@ export default function ChatWidget() {
         </div>
       )}
 
-      {/* Toggle button */}
       <button
         className={`chat-toggle-btn ${isOpen ? "open" : ""}`}
         onClick={() => setIsOpen(!isOpen)}
